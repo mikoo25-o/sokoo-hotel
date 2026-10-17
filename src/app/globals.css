@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SokoHotel colour tokens. Values are R G B triplets. */
+:root {
+  --color-forest: 124 45 18; /* #7C2D12 deep orange-brown: headings, dark panels */
+  --color-primary: 194 65 12; /* #C2410C orange: buttons, links, header (white text passes AA) */
+  --color-action: 249 115 22; /* #F97316 bright orange: accents, indicators, highlights */
+  --color-ink: 31 41 55; /* #1F2937 main text */
+  --color-muted: 100 116 139; /* #64748B secondary text */
+  --color-canvas: 248 250 252; /* #F8FAFC light background */
+  --color-line: 219 227 234; /* #DBE3EA borders */
+  --color-danger: 185 28 28; /* #B91C1C error red */
+  --color-warn: 180 83 9; /* #B45309 warning amber */
+  --color-ok: 21 128 61; /* #15803D success green (paid, ready, verified) */
+  --color-sky: 224 242 254; /* #E0F2FE sky-blue card background */
+  --color-skyline: 186 230 253; /* #BAE6FD sky-blue border */
+  --color-skyink: 12 74 110; /* #0C4A6E text on sky-blue cards */
+  --color-skyd: 14 165 233; /* #0EA5E9 sky-blue chart and icon colour */
+  --color-hot: 255 90 79; /* #FF5A4F red for text on dark photos */
+  --font-inter: "Inter Variable";
+  --font-poppins: "Poppins";
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    overscroll-behavior-y: none;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  button, [role="button"], a {
+    touch-action: manipulation;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+  }
+  input, select, textarea {
+    /* 16px stops iOS Safari zooming into form fields */
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* Recolourable glyph made from a supplied black icon (see RoleIcon). */
+  .glyph {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  .scroll-hide {
+    scrollbar-width: none;
+  }
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Receipts and bills print on their own, without app chrome. */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+}
+.print-only { display: none; }

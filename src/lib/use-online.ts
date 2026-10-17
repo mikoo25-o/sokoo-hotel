@@ -1,0 +1,20 @@
+"use client";
+import { useSyncExternalStore } from "react";
+
+const subscribe = (cb: () => void) => {
+  window.addEventListener("online", cb);
+  window.addEventListener("offline", cb);
+  return () => {
+    window.removeEventListener("online", cb);
+    window.removeEventListener("offline", cb);
+  };
+};
+
+/** True while the device has a network connection. Always true during server rendering. */
+export function useOnline(): boolean {
+  return useSyncExternalStore(
+    subscribe,
+    () => navigator.onLine,
+    () => true,
+  );
+}

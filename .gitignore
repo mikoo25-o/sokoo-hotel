@@ -1,0 +1,23 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next.js
+.next
+out
+next-env.d.ts
+
+# secrets - never commit these. Use .env.local for real values.
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+coverage
+.vercel
+supabase/.temp
+supabase/.branches
